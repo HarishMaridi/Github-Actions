@@ -1,11 +1,13 @@
 name: Terraform AWS Workflow
 
-
 on:
   push:
-  branches: [ main ]
-  # workflow_dispatch:  # ✅ Manual trigger 
-
+    branches:
+      - "**"          # ✅ Run on any branch push
+  pull_request:
+    branches:
+      - main           # ✅ Optional: run on PRs to main
+  workflow_dispatch:   # ✅ Optional: manual trigger
 
 jobs:
   terraform:
@@ -34,5 +36,7 @@ jobs:
       # 4️⃣ Terraform Plan
       - name: Terraform Plan
         run: terraform plan
+
+      # 5️⃣ Terraform Apply
       - name: Terraform Apply
         run: terraform apply -auto-approve
